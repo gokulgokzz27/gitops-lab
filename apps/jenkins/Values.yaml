@@ -1,0 +1,29 @@
+
+jenkins:
+  controller:
+    # Run the official Jenkins LTS image.
+    image:
+      tag: "2.580.1-jdk21"
+
+    # Minikube access through a NodePort service.
+    serviceType: NodePort
+    servicePort: 8080
+    targetPort: 8080
+    nodePort: 32000
+
+    # Reserve no executors on the controller.
+    numExecutors: 0
+
+    # Starter resource allocation.
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "1000m"
+        memory: "2Gi"
+
+  # Keep Jenkins data across pod restarts.
+  persistence:
+    enabled: true
+    size: 8Gi
